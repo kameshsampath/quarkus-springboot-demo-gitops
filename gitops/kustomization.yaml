@@ -6,7 +6,6 @@ namespace: argocd
 resources:
   - project.yaml
   - fruits-app-repositories.yaml
-  - fruits-app-core.yaml
   - fruits-app-rbac.yaml
   - fruits-app-db.yaml
   - fruits-app-pipelines.yaml
