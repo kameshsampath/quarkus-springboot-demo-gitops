@@ -100,16 +100,11 @@ The Knative Service will be deployed but will not have it running since there is
 oc project quarkus-springboot-demo
 ----
 
-=== Spring Boot 
+=== Setup Webhook
 
 [source,bash]
 ----
-oc project quarkus-springboot-demo
+oc get routes -n hybrid-cloud-demo
 ----
 
-=== Quarkus Spring Boot
-
-[source,bash]
-----
-oc project quarkus-springboot-demo
-----
+Add the url https://fruits-app-github-webhook-quarkus-springboot-demo.apps.aws.devx.red, as the https://docs.github.com/en/developers/webhooks-and-events/webhooks[Webhook]. https://github.com/kameshsampath/quarkus-springboot-demo[Application Repository] to trigger rebuild of the images, when application source changes.
