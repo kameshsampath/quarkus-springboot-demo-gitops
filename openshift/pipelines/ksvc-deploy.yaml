@@ -21,6 +21,10 @@ spec:
       description: >-
         The GitHub revision to use, defaults to master
       default: master
+    - name: GITHUB_DEFAULT_PR_BRANCH
+      descripton: >-
+        The branch against which the PR needs to be raised
+      default: master
     - name: IMAGE_NAME
       description: >-
         The OpenShift internal image registry URL
@@ -92,7 +96,7 @@ spec:
         - name: new-image-url
           value: "$(params.IMAGE_NAME)@$(tasks.buildah-build-push.results.IMAGE_DIGEST)"
         - name: source-branch
-          value: "$(params.GITHUB_REPO_REVISION)"
+          value: "$(params.GITHUB_DEFAULT_PR_BRANCH)"
         - name: source-repo
           value: "$(params.GITHUB_REPO_NAME)"
         - name: update-key
