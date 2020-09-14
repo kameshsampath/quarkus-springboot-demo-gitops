@@ -21,6 +21,8 @@ spec:
           tekton.dev/pipeline: ksvc-deploy
       spec:
         params:
+          - name: GITHUB_REPO_NAME
+            value: $(params.gitrepositoryname)
           - name: GITHUB_REPO_URL
             value: $(params.gitrepositoryurl)
           - name: GITHUB_REPO_REVISION

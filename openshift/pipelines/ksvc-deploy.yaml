@@ -23,8 +23,8 @@ spec:
       default: master
     - name: IMAGE_NAME
       description: >-
-        The fully qualified image name e.g example.com/tekton-tutorial/helloworld
-      default: image-registry.openshift-imageregistry.svc:5000/quarkus-springboot-demo/fruits-app
+        The OpenShift internal image registry URL
+      default: image-registry.openshift-image-registry.svc:5000/quarkus-springboot-demo/fruits-app
   workspaces:
     - name: source
     - name: maven-settings

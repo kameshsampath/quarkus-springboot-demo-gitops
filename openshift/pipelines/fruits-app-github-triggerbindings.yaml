@@ -9,3 +9,5 @@ spec:
       value: $(body.head_commit.id)
     - name: gitrepositoryurl
       value: $(body.repository.url)
+    - name: gitrepositoryname
+      value: $(body.repository.full_name)
