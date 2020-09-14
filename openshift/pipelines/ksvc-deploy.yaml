@@ -86,7 +86,7 @@ spec:
         - name: driver
           value: "github"
         - name: file-path
-          value: "openshift/knative/service.yaml"
+          value: "k8s/knative/service.yaml"
         - name: image-repo
           value: $(params.IMAGE_NAME)
         - name: new-image-url
