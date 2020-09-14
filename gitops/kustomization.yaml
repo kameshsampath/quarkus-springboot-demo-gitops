@@ -9,4 +9,4 @@ resources:
   - fruits-app-rbac.yaml
   - fruits-app-db.yaml
   - fruits-app-pipelines.yaml
-  - fruits-app-service.yaml
+  - fruits-app-knative-service.yaml
