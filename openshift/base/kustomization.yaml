@@ -6,3 +6,6 @@ namespace: quarkus-springboot-demo
 # Adds quarkus-springboot-demo label to all resources.
 commonLabels:
   app.kubernetes.io/part-of: quarkus-springboot-demo
+
+generatorOptions:
+  disableNameSuffixHash: true
