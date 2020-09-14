@@ -10,6 +10,9 @@ spec:
       default: staging
     - name: gitrepositoryurl
       description: The git repository url
+    - name: gitrepositoryname
+      description: >-
+        The git repository name excluding the github.com e.g foo/my-app
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
