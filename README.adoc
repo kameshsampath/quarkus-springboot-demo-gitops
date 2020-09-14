@@ -1,0 +1,115 @@
+= Quarkus Spring Boot Demo
+
+Demonstrate Quarkus Spring Boot demo. This README details how to deploy the demo *Cloud Native* on to a https://try.openshift.com[OpenShift] cluster.
+
+
+== Pre-requisites
+
+- OpenShift4 Cluster
+- OpenShift Serverless (Knative)
+- OpenShift Pipelines (Tektoncd)
+- ArgoCD
+- Tekton CLI
+
+== Prepare Cluster
+
+=== Depoloy OpenShift Serverless
+
+[source,bash]
+----
+oc apply -k openshift/cluster/serverless
+----
+
+Wait for OpenShift Serverless components to be up and running, check the status using the command:
+
+[source,bash]
+----
+oc rollout status -n knative-serving activator
+oc rollout status -n knative-serving autoscaler
+oc rollout status -n knative-serving autoscaler-hpa
+oc rollout status -n knative-serving controller
+oc rollout status -n knative-serving webhook
+----
+
+=== Depoloy OpenShift Pipelines
+
+[source,bash]
+----
+oc apply -k openshift/cluster/pipelines
+----
+
+Wait for OpenShift Pipelines components to be up and running, check the status using the command:
+
+[source,bash]
+----
+oc rollout status -n openshift-pipelines deploy tekton-pipelines-controller
+oc rollout status -n openshift-pipelines deploy tekton-pipelines-webhook
+oc rollout status -n openshift-pipelines deploy tekton-triggers-controller
+oc rollout status -n openshift-pipelines deploy tekton-triggers-webhook
+----
+
+=== Deploy Argo CD
+
+[source,bash]
+----
+oc apply -k openshift/cluster/argocd
+----
+
+Wait for Argo CD components to be up and running, check the status using the command:
+
+[source,bash]
+----
+oc rollout status -n argocd deploy argocd-operator
+oc rollout status -n argocd deploy argocd-openshift-oauth-application-controller
+oc rollout status -n argocd deploy argocd-openshift-oauth-dex-server
+oc rollout status -n argocd deploy argocd-openshift-oauth-redis
+oc rollout status -n argocd deploy argocd-openshift-oauth-repo-server
+oc rollout status -n argocd deploy argocd-openshift-oauth-server
+----
+
+#TODO#
+
+[source,bash]
+----
+oc adm policy add-cluster-role-to-user cluster-admin -n argocd -z argocd-application-controller
+----
+
+== Deploy Demo
+
+The Application is deployed using Argo CD:
+
+[source,bash]
+----
+oc apply -k gitops
+----
+
+=== GitHub Secret
+
+As the Pipelines will create a PR to GitHub its requried that it be provided with a https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token[GitHub PAT]:
+
+[source,bash]
+----
+export GITHUB_PAT_TOKEN=<your-github-pat>
+oc create secret generic image-updater-secret --from-literal=token=$GITHUB_PAT_TOKEN
+----
+
+The Knative Service will be deployed but will not have it running since there is no image in the registry. Lets do the first build of the application to deploy it:
+
+[source,bash]
+----
+oc project quarkus-springboot-demo
+----
+
+=== Spring Boot 
+
+[source,bash]
+----
+oc project quarkus-springboot-demo
+----
+
+=== Quarkus Spring Boot
+
+[source,bash]
+----
+oc project quarkus-springboot-demo
+----
