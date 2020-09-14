@@ -7,7 +7,7 @@ spec:
     spec:
       containerConcurrency: 1
       containers:
-      - image: image-registry.openshift-image-registry.svc:5000/quarkus-springboot-demo/fruits-app@sha256:60cda46067720f6d036ce2f772d96222461a1ecfc095176e3a614482bc3421cd
+      - image: image-registry.openshift-image-registry.svc:5000/quarkus-springboot-demo/fruits-app@sha256:63b733acb83e270d42c7c68eaf42ba80ef3d2019062f6cfb8a98e39fd08ac4b8
         imagePullPolicy: Always
         name: user-container
       serviceAccountName: fruits-app-sa
