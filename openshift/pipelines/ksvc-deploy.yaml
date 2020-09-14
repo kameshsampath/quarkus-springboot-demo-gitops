@@ -9,10 +9,14 @@ spec:
   description: >-
     The Pipline to build and deploy the Quarkus SpringBoot Demo Java App https://github.com/kameshsampath/quarkus-springboot-demo as Knative Service.
   params:
-    - name: GITHUB_REPO_NAME
+    - name: GITOPS_REPO_NAME
       description: >-
         The GitHub Repo name
-      default: kameshsampath/quarkus-springboot-demo
+      default: kameshsampath/quarkus-springboot-demo-gitops
+    - name: GITOPS_PR_BRANCH
+      description: >-
+        The branch against which the PR needs to be raised
+      default: master
     - name: GITHUB_REPO_URL
       description: >-
         The GitHub Repo of the Java Application
@@ -20,10 +24,6 @@ spec:
     - name: GITHUB_REPO_REVISION
       description: >-
         The GitHub revision to use, defaults to master
-      default: master
-    - name: GITHUB_DEFAULT_PR_BRANCH
-      description: >-
-        The branch against which the PR needs to be raised
       default: master
     - name: IMAGE_NAME
       description: >-
@@ -90,15 +90,15 @@ spec:
         - name: driver
           value: "github"
         - name: file-path
-          value: "k8s/knative/service.yaml"
+          value: "app/knative/service.yaml"
         - name: image-repo
           value: $(params.IMAGE_NAME)
         - name: new-image-url
           value: "$(params.IMAGE_NAME)@$(tasks.buildah-build-push.results.IMAGE_DIGEST)"
         - name: source-branch
-          value: "$(params.GITHUB_DEFAULT_PR_BRANCH)"
+          value: "$(params.GITOPS_PR_BRANCH)"
         - name: source-repo
-          value: "$(params.GITHUB_REPO_NAME)"
+          value: "$(params.GITOPS_REPO_NAME)"
         - name: update-key
           value: "spec.template.spec.containers.0.image"
         - name: insecure

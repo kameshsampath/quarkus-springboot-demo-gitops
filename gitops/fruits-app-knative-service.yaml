@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fruits-app-service
+  name: fruits-app-knative-service
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -16,6 +16,6 @@ spec:
       prune: true
       selfHeal: true
   source:
-    path: k8s/knative
-    repoURL: https://github.com/kameshsampath/quarkus-springboot-demo
+    path: app/knative
+    repoURL: https://github.com/kameshsampath/quarkus-springboot-demo-gitops
     targetRevision: HEAD
