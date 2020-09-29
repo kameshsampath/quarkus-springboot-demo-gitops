@@ -24,14 +24,14 @@ Wait for OpenShift Serverless components to be up and running, check the status 
 
 [source,bash]
 ----
-oc rollout status -n knative-serving activator
-oc rollout status -n knative-serving autoscaler
-oc rollout status -n knative-serving autoscaler-hpa
-oc rollout status -n knative-serving controller
-oc rollout status -n knative-serving webhook
+oc rollout status -n knative-serving deploy activator
+oc rollout status -n knative-serving deploy autoscaler
+oc rollout status -n knative-serving deploy autoscaler-hpa
+oc rollout status -n knative-serving deploy controller
+oc rollout status -n knative-serving deploy webhook
 ----
 
-=== Depoloy OpenShift Pipelines
+=== Deploy OpenShift Pipelines
 
 [source,bash]
 ----
