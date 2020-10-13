@@ -72,6 +72,7 @@ oc rollout status -n argocd deploy argocd-openshift-oauth-server
 [source,bash]
 ----
 oc adm policy add-cluster-role-to-user cluster-admin -n argocd -z argocd-application-controller
+oc adm groups new argocd-admins <your openshfit admin-user>
 ----
 
 == Deploy Demo
