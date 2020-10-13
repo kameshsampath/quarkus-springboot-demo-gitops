@@ -71,7 +71,7 @@ Add needed roles and groups:
 [source,bash]
 ----
 oc adm policy add-cluster-role-to-user cluster-admin -n argocd -z argocd-application-controller
-oc adm groups new argocd-admins <your openshfit admin-user>
+oc adm groups add-users argocd-admins  <your openshfit admin-user>
 ----
 
 == Deploy Demo
