@@ -1,19 +1,18 @@
-= Quarkus Spring Boot Demo
+= GitOps::Quarkus Spring Boot Demo
 
 Demonstrate Quarkus Spring Boot demo. This README details how to deploy the demo *Cloud Native* on to a https://try.openshift.com[OpenShift] cluster.
 
-
 == Pre-requisites
 
-- OpenShift4 Cluster
-- OpenShift Serverless (Knative)
-- OpenShift Pipelines (Tektoncd)
-- ArgoCD
-- Tekton CLI
+- https://try.openshift.com[OpenShift4 Cluster]
+- OpenShift Serverless (https://knative.dev[Knative])
+- OpenShift Pipelines (https://tekton.dev[Tektoncd])
+- https://argoproj.github.io/[ArgoCD]
+- https://github.com/tektoncd/cli[Tekton CLI]
 
 == Prepare Cluster
 
-=== Depoloy OpenShift Serverless
+=== Deploy OpenShift Serverless
 
 [source,bash]
 ----
@@ -67,7 +66,7 @@ oc rollout status -n argocd deploy argocd-openshift-oauth-repo-server
 oc rollout status -n argocd deploy argocd-openshift-oauth-server
 ----
 
-#TODO#
+Add needed roles and groups:
 
 [source,bash]
 ----
@@ -86,26 +85,30 @@ oc apply -k gitops
 
 === GitHub Secret
 
-As the Pipelines will create a PR to GitHub its requried that it be provided with a https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token[GitHub PAT]:
-
-[source,bash]
-----
-export GITHUB_PAT_TOKEN=<your-github-pat>
-oc create secret generic image-updater-secret --from-literal=token=$GITHUB_PAT_TOKEN
-----
-
-The Knative Service will be deployed but will not have it running since there is no image in the registry. Lets do the first build of the application to deploy it:
+Navigate to the demo project
 
 [source,bash]
 ----
 oc project quarkus-springboot-demo
 ----
 
+As the Pipelines will create a PR to GitHub its required that it be provided with a https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token[GitHub PAT]:
+
+[source,bash]
+----
+export GITHUB_PAT_TOKEN=<your-github-pat>
+oc create secret \
+  -n quarkus-springboot-demo generic image-updater-secret \
+  --from-literal=token=$GITHUB_PAT_TOKEN
+----
+
 === Setup Webhook
 
 [source,bash]
 ----
-oc get routes -n hybrid-cloud-demo
+oc get routes -n quarkus-springboot-demo fruits-app-github-webhook
 ----
 
-Add the url https://fruits-app-github-webhook-quarkus-springboot-demo.apps.aws.devx.red, as the https://docs.github.com/en/developers/webhooks-and-events/webhooks[Webhook]. https://github.com/kameshsampath/quarkus-springboot-demo[Application Repository] to trigger rebuild of the images, when application source changes.
+Add the url got from the previous command as the https://docs.github.com/en/developers/webhooks-and-events/webhooks[Webhook].
+
+The Knative Service will be deployed but will not have it running since there is no image in the registry. Try a sample push to https://github.com/kameshsampath/quarkus-springboot-demo[Application Repository] to trigger build and deploy of the application.
