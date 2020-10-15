@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: quarkus-springboot-demo
 
 resources:
+  - argocd-application-controller-crb.yaml
+  - argocd-admins.yaml
   - tekton-triggers-admin.yaml
   - tekton-triggers-webhook.yaml
   - quarkus-springboot-demo.yaml
