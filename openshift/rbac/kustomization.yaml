@@ -3,9 +3,18 @@ kind: Kustomization
 
 namespace: quarkus-springboot-demo
 
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: quarkus-springboot-demos
+    files:
+      - htpasswd=users.htpass
+
 resources:
-#  - argocd-application-controller-crb.yaml
-#  - argocd-admins.yaml
+  - argocd-oauth-provider.yaml
+  - argocd-application-controller-crb.yaml
+  - argocd-admins.yaml
   - tekton-triggers-admin.yaml
   - tekton-triggers-webhook.yaml
   - quarkus-springboot-demo.yaml

@@ -1,9 +1,10 @@
 = GitOps::Quarkus Spring Boot Demo
 
-Demonstrate Quarkus Spring Boot demo. This README details how to deploy the demo *Cloud Native* on to a https://try.openshift.com[OpenShift] cluster.
+Demonstrate Quarkus Spring Boot demo.This README details how to deploy the demo *Cloud Native* on to a https://try.openshift.com[OpenShift] cluster.
 
 == Pre-requisites
 
+- https://adoptopenjdk.net/[Java 11]
 - https://try.openshift.com[OpenShift4 Cluster]
 - OpenShift Serverless (https://knative.dev[Knative])
 - OpenShift Pipelines (https://tekton.dev[Tektoncd])
@@ -11,6 +12,24 @@ Demonstrate Quarkus Spring Boot demo. This README details how to deploy the demo
 - https://github.com/tektoncd/cli[Tekton CLI]
 
 == Prepare Cluster
+
+Create a OpenShift Admin user and Password, to be able to use the user with OpenShift and Argo CD, it needs to be configured as https://docs.openshift.com/container-platform/4.5/authentication/identity_providers/configuring-htpasswd-identity-provider.html[OpenShift Htpasswd Identity Provider].
+To configure the Htpasswd Identity provider, it's required generate a htpasswd file, run the following command to generate the password file:
+
+[source,bash]
+----
+./mvnw clean package
+java -jar target/quarkus-springboot-demo-gitops-runner.jar
+----
+
+The command will generate a file called `users.htpass` in link:./openshift/rbac/users.htpass[users.htpass]
+
+[NOTE]
+====
+* `target/quarkus-springboot-demo-gitops-runner.jar --h` will show available options
+* If you don't specify the customization options, the defaults are user  `ocpadmin` with password `adminPa55word!`,
+* The identity provider will be configured as part of the link:./gitops/fruits-app-rbac.yaml[Fruits App RBAC]
+====
 
 === Deploy OpenShift Serverless
 
@@ -66,14 +85,6 @@ oc rollout status -n argocd deploy argocd-openshift-oauth-repo-server
 oc rollout status -n argocd deploy argocd-openshift-oauth-server
 ----
 
-Add needed roles and groups:
-
-[source,bash]
-----
-oc adm policy add-cluster-role-to-user cluster-admin -n argocd -z argocd-application-controller
-oc adm groups add-users argocd-admins  <your openshfit admin-user>
-----
-
 == Deploy Demo
 
 The Application is deployed using Argo CD:
@@ -92,6 +103,8 @@ Navigate to the demo project
 oc project quarkus-springboot-demo
 ----
 
+[IMPORTANT]
+====
 As the Pipelines will create a PR to GitHub its required that it be provided with a https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token[GitHub PAT]:
 
 [source,bash]
@@ -101,6 +114,7 @@ oc create secret \
   -n quarkus-springboot-demo generic image-updater-secret \
   --from-literal=token=$GITHUB_PAT_TOKEN
 ----
+====
 
 === Setup Webhook
 
