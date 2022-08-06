@@ -5,8 +5,7 @@
 replicaCount: 1
 
 image:
-  # defaults local kind registry 
-  name: kind-registry:5000/example/quarkus-springboot-demo
+  name: quarkus-springboot-demo
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"

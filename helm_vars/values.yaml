@@ -1,1 +1,4 @@
 fullnameOverride: "fruits-api"
+image:
+  # defaults to using local kind registry 
+  name: "kind-registry:5000/example/quarkus-springboot-demo"
