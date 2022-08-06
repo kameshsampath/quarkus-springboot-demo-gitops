@@ -31,7 +31,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.name }}@dummy"
+          image: "example/quarkus-springboot-demo@dummy"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
