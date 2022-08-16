@@ -1,10 +1,10 @@
 fullnameOverride: "fruits-api"
 imageCredentials:
-  registry: "${REGISTRY_NAME}:${REGISTRY_PORT}"
+  registry: "${REGISTRY_NAME}"
   username: "${IMAGE_REGISTRY_USER}"
   password: "${IMAGE_REGISTRY_PASSWORD}"
 imagePullSecrets:
   - name: my-registry-creds
 image:
   # defaults to using local nexus registry deployed as part of DAG stack
-  name: "${REGISTRY_NAME}:${REGISTRY_PORT}/example/quarkus-springboot-demo"
+  name: "${REGISTRY_NAME}/example/quarkus-springboot-demo"

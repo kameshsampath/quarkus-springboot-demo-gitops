@@ -1,10 +1,10 @@
 fullnameOverride: "fruits-api"
 imageCredentials:
-  registry: "nexus.infra.svc.cluster.local:18081"
+  registry: "nexus.infra.svc.cluster.local"
   username: "admin"
   password: "admin123"
 imagePullSecrets:
   - name: my-registry-creds
 image:
   # defaults to using local nexus registry deployed as part of DAG stack
-  name: "nexus.infra.svc.cluster.local:18081/example/quarkus-springboot-demo"
+  name: "nexus.infra.svc.cluster.local/example/quarkus-springboot-demo"
