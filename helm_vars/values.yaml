@@ -1,4 +1,4 @@
 fullnameOverride: "fruits-api"
 image:
-  # defaults to using local kind registry 
-  name: "kind-registry:5000/example/quarkus-springboot-demo"
+  # defaults to using local nexus registry 
+  name: "${REGISTRY_NAME}:${REGISTRY_PORT}/example/quarkus-springboot-demo"

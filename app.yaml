@@ -9,7 +9,7 @@ metadata:
   labels:
     name: quarkus-springboot-demo
   annotations:
-    argocd-image-updater.argoproj.io/image-list: "qsbdemo=kind-registry:5000/example/quarkus-springboot-demo:latest"
+    argocd-image-updater.argoproj.io/image-list: "qsbdemo=${REGISTRY_NAME}:${REGISTRY_PORT}/example/quarkus-springboot-demo:latest"
     argocd-image-updater.argoproj.io/qsbdemo.update-strategy: digest
 spec:
   project: ${ARGO_CD_PROJECT}
