@@ -4,7 +4,7 @@ imageCredentials:
   username: "admin"
   password: "admin123"
 imagePullSecrets:
-  - my-registry-creds
+  - name: my-registry-creds
 image:
   # defaults to using local nexus registry deployed as part of DAG stack
   name: "nexus.infra.svc.cluster.local:18081/example/quarkus-springboot-demo"
