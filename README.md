@@ -26,4 +26,13 @@ Update the App helm `$APP_HOME/helm_vars/values.yaml`
 envsubst < $APP_HOME/app.yaml | kubectl apply -f -
 ```
 
+```shell
+envsubst < "$APP_HOME/helm_vars/values.tpl.yaml" > "$APP_HOME/helm_vars/values.yaml"
+```
+
 Commit and push the code to Gitea repo to see the application deployed to the Kubernetes cluster.
+
+```shell
+git commit -a -m "Trigger update"
+git push origin main
+```

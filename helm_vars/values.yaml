@@ -1,4 +1,4 @@
 fullnameOverride: "fruits-api"
 image:
   # defaults to using local nexus registry 
-  name: "${REGISTRY_NAME}:${REGISTRY_PORT}/example/quarkus-springboot-demo"
+  name: "nexus.infra:18081/example/quarkus-springboot-demo"
