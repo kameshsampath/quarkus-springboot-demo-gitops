@@ -1,8 +1,16 @@
-# Quarkus Spring Boot Demo - GitOps
+# Java CI and GitOps with Drone, Argo CD and Gitea
 
 This repository act as GitOps repo for the <https://github.com/kameshsampath/quarkus-springboot-demo> app.
 
-Please check the <https://github.com/kameshsampath/dag-stack> on how to use this repo.
+## Prerequisites
+
+- [Docker for Mac/Windows/Linux](https://www.docker.com/products/docker-desktop)
+- [httpie](https://httpie.org/)
+- [Drone CLI](https://docs.drone.io/cli/install/)
+
+## Setup DAG Stack
+
+You need a environment that can help you do CI and GitOps. You can setup one locally as described here <https://github.com/kameshsampath/dag-stack.git>.
 
 ## Environment
 
