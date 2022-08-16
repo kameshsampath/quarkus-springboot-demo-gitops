@@ -23,16 +23,18 @@ export GIT_REPO="http://gitea-127.0.0.1.sslip.io:30950/${GIT_USER}/quarkus-sprin
 Update the App helm `$APP_HOME/helm_vars/values.yaml`
 
 ```shell
-envsubst < $APP_HOME/app.yaml | kubectl apply -f -
-```
-
-```shell
 envsubst < "$APP_HOME/helm_vars/values.tpl.yaml" > "$APP_HOME/helm_vars/values.yaml"
 ```
 
-Commit and push the code to Gitea repo to see the application deployed to the Kubernetes cluster.
+Commit and push the code to git repo,
 
 ```shell
-git commit -a -m "Trigger update"
+git commit -a -m "Init GitOps"
 git push origin main
+```
+
+Deploy Argo CD application Kubernetes cluster that will use our GitOps repo,
+
+```shell
+envsubst < $APP_HOME/app.yaml | kubectl apply -f -
 ```
