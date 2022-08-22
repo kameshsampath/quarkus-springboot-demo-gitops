@@ -30,5 +30,5 @@ git push origin main
 Deploy Argo CD application Kubernetes cluster that will use our GitOps repo,
 
 ```shell
-kustomize build "$APP_GITOPS_HOME/app.yaml"| envsubst | kubectl apply -f -
+kustomize build "$APP_GITOPS_HOME"| envsubst | kubectl apply -f -
 ```
