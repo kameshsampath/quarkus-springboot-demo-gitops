@@ -37,3 +37,4 @@ release.properties
 
 **/users.htpass
 
+.envrc.local
