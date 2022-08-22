@@ -15,7 +15,7 @@ spec:
   project: ${ARGO_CD_PROJECT}
   source:
     repoURL: ${GIT_REPO}
-    targetRevision:  main
+    targetRevision:  ${QSBD_GITOPS_GIT_REV}
     path: app
     helm:
       releaseName: quarkus-springboot-demo
