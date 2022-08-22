@@ -9,10 +9,13 @@ metadata:
   labels:
     name: quarkus-springboot-demo
   annotations:
+    # https://argocd-image-updater.readthedocs.io/en/stable/configuration/applications/
+    argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/image-list: "qsbdemo=${REGISTRY_NAME}/example/quarkus-springboot-demo:latest"
     argocd-image-updater.argoproj.io/qsbdemo.update-strategy: digest
 spec:
-  project: ${ARGO_CD_PROJECT}
+  # TODO: try with different project
+  project: default
   source:
     repoURL: ${GIT_REPO}
     targetRevision:  ${QSBD_GITOPS_GIT_REV}

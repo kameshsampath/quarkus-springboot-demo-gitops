@@ -14,10 +14,10 @@ You need a environment that can help you do CI and GitOps. You can setup one loc
 
 ## GitOps
 
-Update the App helm `$APP_HOME/helm_vars/values.yaml`
+Update the App helm `$APP_GITOPS_HOME/helm_vars/values.yaml`
 
 ```shell
-envsubst < "$APP_HOME/helm_vars/values.tpl.yaml" > "$APP_HOME/helm_vars/values.yaml"
+envsubst < "$APP_GITOPS_HOME/helm_vars/values.tpl.yaml" > "$APP_GITOPS_HOME/helm_vars/values.yaml"
 ```
 
 Commit and push the code to git repo,
@@ -30,5 +30,5 @@ git push origin main
 Deploy Argo CD application Kubernetes cluster that will use our GitOps repo,
 
 ```shell
-envsubst < $APP_HOME/app.yaml | kubectl apply -f -
+kustomize build "$APP_GITOPS_HOME/app.yaml"| envsubst | kubectl apply -f -
 ```
